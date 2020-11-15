@@ -1,75 +1,81 @@
 ;; -*- no-byte-compile: t; -*-
+;;; $DOOMDIR/packages.el
 
-(package! rotate :pin "091b5ac4fc310773253efb317e3dbe8e46959ba6")
+;; To install a package with Doom you must declare them here and run 'doom sync'
+;; on the command line, then restart Emacs for the changes to take effect -- or
+;; use 'M-x doom/reload'.
 
-(package! xkcd :pin "66e928706fd660cfdab204c98a347b49c4267bdf")
 
-(package! selectric-mode :pin "1840de71f7414b7cd6ce425747c8e26a413233aa")
+;; To install SOME-PACKAGE from MELPA, ELPA or emacsmirror:
+;(package! some-package)
 
-(package! wttrin :recipe (:local-repo "lisp" :no-byte-compile t))
+;; To install a package directly from a remote git repo, you must specify a
+;; `:recipe'. You'll find documentation on what `:recipe' accepts here:
+;; https://github.com/raxod502/straight.el#the-recipe-format
+;(package! another-package
+;  :recipe (:host github :repo "username/repo"))
 
-(package! spray :pin "00638bc916227f2f961013543d10e85a43a32e29")
+;; If the package you are trying to install does not contain a PACKAGENAME.el
+;; file, or is located in a subdirectory of the repo, you'll need to specify
+;; `:files' in the `:recipe':
+;(package! this-package
+;  :recipe (:host github :repo "username/repo"
+;           :files ("some-file.el" "src/lisp/*.el")))
 
-(package! theme-magic :pin "844c4311bd26ebafd4b6a1d72ddcc65d87f074e3")
+;; If you'd like to disable a package included with Doom, you can do so here
+;; with the `:disable' property:
+;(package! builtin-package :disable t)
 
-(package! elcord :pin "01b26d1af2f33a7c7c5a1c24d8bfb6d40115a7b0")
+;; You can override the recipe of a built in package without having to specify
+;; all the properties for `:recipe'. These will inherit the rest of its recipe
+;; from Doom or MELPA/ELPA/Emacsmirror:
+;(package! builtin-package :recipe (:nonrecursive t))
+;(package! builtin-package-2 :recipe (:repo "myfork/package"))
 
-(package! keycast :pin "038475c178e90c7bad64d113db26d42cad60e149")
+;; Specify a `:branch' to install a package from a particular branch or tag.
+;; This is required for some packages whose default branch isn't 'master' (which
+;; our package manager can't deal with; see raxod502/straight.el#279)
+;(package! builtin-package :recipe (:branch "develop"))
 
-(package! gif-screencast :pin "e39786458fb30e2e9683094c75c6c2cef537d9c4")
+;; Use `:pin' to specify a particular commit to install.
+;(package! builtin-package :pin "1a2b3c4d5e")
 
+
+;; Doom's packages are pinned to a specific commit and updated from release to
+;; release. The `unpin!' macro allows you to unpin single packages...
+;(unpin! pinned-package)
+;; ...or multiple packages
+;(unpin! pinned-package another-pinned-package)
+;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
+;(unpin! t)
+
+
+;; nice extension to calc
 (package! calctex :recipe (:host github :repo "johnbcoughlin/calctex"
-                           :files ("*.el" "calctex/*.el" "calctex-contrib/*.el" "org-calctex/*.el"))
-  :pin "7fa2673c64e259e04aef684ccf09ef85570c388b")
+                                 :files ("*.el" "calctex/*.el" "calctex-contrib/*.el" "org-calctex/*.el")))
 
-(package! ess-view :pin "d4e5a340b7bcc58c434867b97923094bd0680283")
+;; view data frame better
+(package! ess-view)
 
-;; (package! magit-delta :recipe (:host github :repo "dandavison/magit-delta") :pin "b8526f890415374822514e488341d2b706d6bc2f")
+;; make manual pages nicer to look at
+(package! info-colors)
 
-(package! info-colors :pin "47ee73cc19b1049eef32c9f3e264ea7ef2aaf8a5")
+;; for large file open
+(package! vlf :recipe (:host github :repo "m00natic/vlfi" :files ("*.el")))
 
-(package! vlf :recipe (:host github :repo "m00natic/vlfi" :files ("*.el"))
-  :pin "cc02f2533782d6b9b628cec7e2dcf25b2d05a27c" :disable t)
+;; mixed-pitch
+(package! mixed-pitch)
 
-(package! lexic :recipe (:local-repo "lisp/lexic"))
+;; org
+(unpin! org-mode)
+(package! org-super-agenda) ;; better agenda
+(package! doct :recipe (:host github :repo "progfolio/doct")) ;; nicer way to set org-capture
+(package! org-pretty-table-mode :recipe (:host github :repo "Fuco1/org-pretty-table")) ;; better org-table
+(package! org-pretty-tags) ;; make pretty tags for org
+(package! ox-gfm) ;; exporting to markdown
+(package! org-graph-view :recipe (:host github :repo "alphapapa/org-graph-view"))
+(package! org-roam-server)
+;(package! company-org-roam :recipe (:host github :repo "jethrokuan/company-org-roam")) ;; company for org-roam
 
-(package! auto-activating-snippets :recipe
-  (:host github :repo "ymarco/auto-activating-snippets")
-  :pin "a6386b062cacbbea30c6d239a771d69859839f1d")
-(package! latex-auto-activating-snippets
-  :recipe (:local-repo "lisp/LaTeX-auto-activating-snippets"))
-
-(unpin! org)
-
-(package! org-super-agenda :pin "3264255989021b8563ea42b5d26acbc2a024f14d")
-
-(package! doct
-  :recipe (:host github :repo "progfolio/doct")
-  :pin "dabb30ebea866ef225b81561c8265d740b1e81c3")
-
-(package! org-pretty-table-mode
-  :recipe (:host github :repo "Fuco1/org-pretty-table") :pin "474ad84a8fe5377d67ab7e491e8e68dac6e37a11")
-
-(package! org-fragtog :pin "92119e3ae7c9a0ae2b5c9d9e4801b5fdc4804ad7")
-
-(package! org-pretty-tags :pin "40fd72f3e701e31813f383fb429d30bb88cee769")
-
-(package! ox-gfm :pin "99f93011b069e02b37c9660b8fcb45dab086a07f")
-
-(package! org-ref :pin "2a91b6f67dc3116b0b688c1242ce67d90d833326")
-
-(package! org-graph-view :recipe (:host github :repo "alphapapa/org-graph-view") :pin "13314338d70d2c19511efccc491bed3ca0758170")
-
-(package! org-chef :pin "5b461ed7d458cdcbff0af5013fbdbe88cbfb13a4")
-
-(package! org-pandoc-import :recipe
-  (:local-repo "lisp/org-pandoc-import" :files ("*.el" "filters" "preprocessors")))
-
-(package! org-roam-server :pin "fde2636d794f020ed5810fa38fe57a264932f661")
-
-(package! systemd :pin "51c148e09a129ddf33d95276aa0e89d4ef6f8dd2")
-
-(package! graphviz-dot-mode :pin "3642a0a5f41a80c8ecef7c6143d514200b80e194")
-
-(package! authinfo-color-mode
-  :recipe (:local-repo "lisp/authinfo-color-mode"))
+;; Graphviz
+(package! graphviz-dot-mode)
