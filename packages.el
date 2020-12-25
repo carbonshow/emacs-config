@@ -75,7 +75,7 @@
 (package! ox-gfm) ;; exporting to markdown
 (package! org-graph-view :recipe (:host github :repo "alphapapa/org-graph-view"))
 (package! org-roam-server)
-;(package! company-org-roam :recipe (:host github :repo "jethrokuan/company-org-roam")) ;; company for org-roam
+(package! company-org-roam) ;; company for org-roam
 
 ;; Graphviz
 (package! graphviz-dot-mode)
